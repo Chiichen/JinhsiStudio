@@ -21,8 +21,8 @@ importers:
         specifier: ^5.19.2
         version: 5.19.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       i18next:
-        specifier: ^23.12.1
-        version: 23.12.1
+        specifier: ^23.12.2
+        version: 23.12.2
       react:
         specifier: ^18.2.0
         version: 18.3.1
@@ -34,7 +34,7 @@ importers:
         version: 4.0.13(react@18.3.1)
       react-i18next:
         specifier: ^15.0.0
-        version: 15.0.0(i18next@23.12.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 15.0.0(i18next@23.12.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react-router-dom:
         specifier: ^6.25.0
         version: 6.25.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -725,8 +725,8 @@ packages:
     resolution: {integrity: sha512-B4FFZ6q/T2jhhksgkbEW3HBvWIfDW85snkQgawt07S7J5QXTk6BkNV+0yAeZrM5QpMAdYlocGoljn0sJ/WQkFw==}
     engines: {node: '>=10.17.0'}
 
-  i18next@23.12.1:
-    resolution: {integrity: sha512-l4y291ZGRgUhKuqVSiqyuU2DDzxKStlIWSaoNBR4grYmh0X+pRYbFpTMs3CnJ5ECKbOI8sQcJ3PbTUfLgPRaMA==}
+  i18next@23.12.2:
+    resolution: {integrity: sha512-XIeh5V+bi8SJSWGL3jqbTEBW5oD6rbP5L+E7dVQh1MNTxxYef0x15rhJVcRb7oiuq4jLtgy2SD8eFlf6P2cmqg==}
 
   internal-ip@7.0.0:
     resolution: {integrity: sha512-qE4TeD4brqC45Vq/+VASeMiS1KRyfBkR6HT2sh9pZVVCzSjPkaCEfKFU+dL0PRv7NHJtvoKN2r82G6wTfzorkw==}
@@ -1888,7 +1888,7 @@ snapshots:
 
   human-signals@2.1.0: {}
 
-  i18next@23.12.1:
+  i18next@23.12.2:
     dependencies:
       '@babel/runtime': 7.24.8
 
@@ -2297,11 +2297,11 @@ snapshots:
       '@babel/runtime': 7.24.8
       react: 18.3.1
 
-  react-i18next@15.0.0(i18next@23.12.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+  react-i18next@15.0.0(i18next@23.12.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       '@babel/runtime': 7.24.8
       html-parse-stringify: 3.0.1
-      i18next: 23.12.1
+      i18next: 23.12.2
       react: 18.3.1
     optionalDependencies:
       react-dom: 18.3.1(react@18.3.1)
