@@ -1,0 +1,20 @@
+{
+    "Label-Home": "Home",
+    "Label-Tools": "Tools",
+    "Label-Data": "Data",
+    "Label-Data-Character": "Character Data",
+    "Label-GachaTracker": "Gacha Tracker",
+    "Label-Profile": "Profile",
+    "Label-Settings": "Settings",
+    "Label-Gacha-Url": "Gacha Url",
+    "Label-Featured": "Featured",
+    "Label-Permanent": "Permanent",
+    "Label-Beginner": "Beginner",
+    "Label-Fetch-Data": "Fetch Data",
+    "Label-Gacha-Setting": "Gacha Setting",
+    "App-Settings": "App Settings",
+    "Gacha-Settings": "Gacha Settings",
+    "Language": "Language",
+    "Message-Please-Input-Valid-Gacha-Url": "Please input valid Gacha Log URL",
+    "Message-Please-Input-Gacha-Url": "Please input Gacha Log URL"
+}

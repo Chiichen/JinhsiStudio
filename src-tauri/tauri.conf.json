@@ -1,5 +1,5 @@
 {
-    "productName": "jinhsi-studio",
+    "productName": "JinhsiStudio",
     "version": "0.0.1",
     "identifier": "cn.chiichen.JinhsiStudio",
     "build": {
@@ -11,7 +11,7 @@
     "app": {
         "windows": [
             {
-                "title": "jinhsi-studio",
+                "title": "JinhsiStudio",
                 "width": 800,
                 "height": 600
             }

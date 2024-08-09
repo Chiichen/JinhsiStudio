@@ -15,7 +15,7 @@ export default function AppSetting() {
 
         <SettingItem label={t("Language")}>
             <Select
-                defaultValue={supportedLanguages[0].value}
+                defaultValue={i18n.language}
                 style={{ width: 120 }}
                 onChange={handleChange}
                 options={supportedLanguages}

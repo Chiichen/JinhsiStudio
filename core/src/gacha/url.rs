@@ -27,9 +27,12 @@ pub struct UrlGachaSource {
 }
 
 impl UrlGachaSource {
-    pub(crate) fn new(raw_url: Url) -> Result<Self, GachaError> {
+    pub fn new(raw_url: Url) -> Result<Self, GachaError> {
+        let fragment = raw_url.fragment().ok_or(GachaError::InvalidUrl {
+            url: raw_url.to_string(),
+        })?;
         let normalized_url = Url::parse(
-            &("https://example.com".to_owned() + raw_url.fragment().unwrap()), // The Url looks like https://aki-gm-resources.aki-game.com/aki/gacha/index.html#/record?svr_id=xxxxxxx, which hides the query behind fragment. So we need to mock a fake base domain to make it works
+            &("https://example.com".to_owned() + fragment), // The Url looks like https://aki-gm-resources.aki-game.com/aki/gacha/index.html#/record?svr_id=xxxxxxx, which hides the query behind fragment. So we need to mock a fake base domain to make it works
         )
         .map_err(|_| GachaError::InvalidUrl {
             url: raw_url.to_string(),
@@ -65,7 +68,7 @@ impl GachaService for UrlGachaSource {
         let mut headers = reqwest::header::HeaderMap::new();
         headers.insert("Content-Type", "application/json".parse().unwrap());
         let mut res: Vec<GachaLog> = Vec::new();
-        for convene_type in 1..6 {
+        for convene_type in 1..8 {
             let body = json!({
                 "playerId": player_id,
                 "cardPoolId": convene_id,
@@ -114,9 +117,13 @@ mod tests {
     #[tokio::test]
     async fn test_get_gacha_data() {
         if let Ok(raw_url) = env::var("GACHA_TEST_URL") {
+            if raw_url.is_empty() {
+                println!("Skip test if GACHA_TEST_URL is empty");
+                return;
+            }
             let source = UrlGachaSource::new(Url::parse(&raw_url).unwrap()).unwrap();
             let r = source.get_gacha_data().await;
-            assert!(r.unwrap().len() > 0);
+            assert_eq!(r.unwrap().len(), 7);
         }
         println!("Skip test if GACHA_TEST_URL is not specified")
     }

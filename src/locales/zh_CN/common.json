@@ -1,0 +1,20 @@
+{
+    "Label-Home": "主页",
+    "Label-Tools": "工具",
+    "Label-Data": "数据",
+    "Label-Data-Character": "角色数据",
+    "Label-GachaTracker": "唤取分析",
+    "Label-Profile": "个人",
+    "Label-Settings": "设置",
+    "Label-Gacha-Url": "唤取链接",
+    "Label-Featured": "限定",
+    "Label-Permanent": "常驻",
+    "Label-Beginner": "新手",
+    "Label-Fetch-Data": "获取数据",
+    "Label-Gacha-Setting": "唤取设置",
+    "App-Settings": "应用设置",
+    "Gacha-Settings": "唤取设置",
+    "Language": "语言",
+    "Message-Please-Input-Valid-Gacha-Url": "请输入有效的唤取查询链接",
+    "Message-Please-Input-Gacha-Url": "请输入唤取查询链接"
+}

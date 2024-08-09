@@ -1,5 +1,5 @@
-import { Button } from "antd";
+import TodoPage from "@/pages/default/todo";
 
 export default function CharacterDataPage() {
-    return <Button>CharacterData</Button>
+    return <TodoPage></TodoPage>
 }

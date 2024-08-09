@@ -14,7 +14,7 @@ pub struct LocalGachaSource {
 }
 
 impl LocalGachaSource {
-    fn new(path: Option<PathBuf>) -> Self {
+    pub fn new(path: Option<PathBuf>) -> Self {
         Self { path }
     }
 
@@ -220,6 +220,18 @@ impl LocalGachaSource {
                 }
             }
 
+            // Manual input
+            if let Some(path) = &self.path {
+                log::info!("Game path from user input: {:?}", path);
+                if let Some(raw_url) = log_check(path) {
+                    if let Ok(url) = Url::parse(&raw_url) {
+                        return Ok(url);
+                    }
+                }
+            } else {
+                log::info!("No game path specified, trying to probe the game path automatically");
+            }
+
             log::info!("Attempting to find URL automatically...");
 
             // Check registry for game path
@@ -265,19 +277,6 @@ impl LocalGachaSource {
             if let Some(path) = check_common_paths() {
                 log::info!("Game path from common installation paths: {:?}", path);
                 if let Some(raw_url) = log_check(&path) {
-                    if let Ok(url) = Url::parse(&raw_url) {
-                        return Ok(url);
-                    }
-                }
-            } else {
-                log::info!("Game path not found in registry.");
-            }
-
-            // Manual input
-            log::info!("Game install location not found or log files missing. Please enter the game install location path:");
-            if let Some(path) = &self.path {
-                log::info!("Game path from common installation paths: {:?}", path);
-                if let Some(raw_url) = log_check(path) {
                     if let Ok(url) = Url::parse(&raw_url) {
                         return Ok(url);
                     }

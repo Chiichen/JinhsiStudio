@@ -7,6 +7,7 @@ use ::url::Url;
 use local::LocalGachaSource;
 use num_derive::{FromPrimitive, ToPrimitive};
 use serde::{Deserialize, Serialize};
+use serde_repr::{Deserialize_repr, Serialize_repr};
 use snafu::Snafu;
 use url::UrlGachaSource;
 
@@ -35,8 +36,15 @@ pub struct GachaLogItem {
     #[serde(alias = "time")]
     date: String,
 }
-
-#[derive(Debug, Serialize, Deserialize, FromPrimitive, ToPrimitive)]
+/// Convene enum which is expected to match the Wuthering Waves' official backend server protocol
+///
+///
+/// ## Tips
+///
+/// - We use `Serialize_repr, Deserialize_repr` to ensure this enum to be serialized as number in ipc channel, otherwise, it will be serialized as plain string such as `"EventCharater"``.
+///
+#[derive(Debug, Serialize_repr, Deserialize_repr, FromPrimitive, ToPrimitive)]
+#[repr(u8)]
 pub enum Convene {
     EventCharacter = 1,           //角色活动唤取 Featured Resonator Convene
     EventWeapon = 2,              //武器活动唤取 Featured Weapon Convene
