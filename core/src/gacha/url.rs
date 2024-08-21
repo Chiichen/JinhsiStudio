@@ -48,10 +48,10 @@ impl UrlGachaSource {
             let r = query_map.insert(query.0.to_string(), query.1.to_string());
             debug_assert!(r.is_none());
         }
-        return Ok(Self {
+        Ok(Self {
             url: original_url,
             query: query_map,
-        });
+        })
     }
     fn get_query_data(&self, key: &str) -> Result<String, GachaError> {
         self.query
@@ -118,7 +118,7 @@ impl GachaService for UrlGachaSource {
                 items,
             })
         }
-        return Ok(res);
+        Ok(res)
     }
 }
 

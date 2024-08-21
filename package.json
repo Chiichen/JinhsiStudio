@@ -1,7 +1,7 @@
 {
     "name": "jinhsi-studio",
     "private": true,
-    "version": "0.0.0",
+    "version": "0.0.1",
     "type": "module",
     "scripts": {
         "dev": "vite",
@@ -9,7 +9,7 @@
         "preview": "vite preview",
         "tauri": "tauri",
         "format": "prettier --write ./src && cargo fmt",
-        "lint": "prettier --check ./src && npx eslint ./src && cargo fmt --check"
+        "lint": "prettier --check ./src && npx eslint ./src && cargo fmt --check && cargo clippy -- -D warnings"
     },
     "dependencies": {
         "@ant-design/icons": "^5.4.0",

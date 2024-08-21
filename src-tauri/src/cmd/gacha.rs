@@ -7,7 +7,7 @@ use super::handle_error;
 #[tauri::command]
 pub(crate) async fn get_gachalog_from_url(url: String) -> Result<Vec<GachaLog>, String> {
     let source = UrlGachaSource::new(url).map_err(handle_error)?;
-    return source.get_gacha_data().await.map_err(handle_error);
+    source.get_gacha_data().await.map_err(handle_error)
 }
 
 #[tauri::command]
@@ -25,7 +25,7 @@ pub(crate) async fn get_gachalog_from_local(path: Option<String>) -> Result<Vec<
         }
     };
     let source = LocalGachaSource::new(path);
-    return source.get_gacha_data().await.map_err(handle_error);
+    source.get_gacha_data().await.map_err(handle_error)
 }
 
 #[tauri::command]
@@ -36,7 +36,7 @@ pub(crate) async fn update_gachalog_from_url(
     let source = UrlGachaSource::new(url).map_err(handle_error)?;
     let new_data = source.get_gacha_data().await.map_err(handle_error)?;
     if let Some(data) = data {
-        if data.len() == 0 {
+        if data.is_empty() {
             return Ok(new_data);
         }
         let merged_data = data
@@ -51,9 +51,9 @@ pub(crate) async fn update_gachalog_from_url(
                 // return old_log.clone();
             })
             .collect();
-        return Ok(merged_data);
+        Ok(merged_data)
     } else {
-        return Ok(new_data);
+        Ok(new_data)
     }
 }
 
@@ -77,7 +77,7 @@ pub(crate) async fn update_gachalog_from_local(
     let source = LocalGachaSource::new(path);
     let new_data = source.get_gacha_data().await.map_err(handle_error)?;
     if let Some(data) = data {
-        if data.len() == 0 {
+        if data.is_empty() {
             return Ok(new_data);
         }
         let merged_data = data
@@ -92,8 +92,8 @@ pub(crate) async fn update_gachalog_from_local(
                 // return old_log.clone();
             })
             .collect();
-        return Ok(merged_data);
+        Ok(merged_data)
     } else {
-        return Ok(new_data);
+        Ok(new_data)
     }
 }

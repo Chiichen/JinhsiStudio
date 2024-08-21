@@ -46,7 +46,7 @@ impl PartialEq for GachaLogItem {
 
 impl PartialOrd for GachaLogItem {
     fn partial_cmp(&self, other: &GachaLogItem) -> std::option::Option<std::cmp::Ordering> {
-        return Some(self.date.cmp(&other.date));
+        Some(self.date.cmp(&other.date))
     }
 }
 
@@ -54,7 +54,7 @@ impl Eq for GachaLogItem {}
 
 impl Ord for GachaLogItem {
     fn cmp(&self, other: &Self) -> std::cmp::Ordering {
-        return self.date.cmp(&other.date);
+        self.date.cmp(&other.date)
     }
 }
 /// Convene enum which is expected to match the Wuthering Waves' official backend server protocol
@@ -86,7 +86,7 @@ pub struct GachaLog {
 
 impl GachaLog {
     pub fn new(convene: Convene, items: Vec<GachaLogItem>) -> Self {
-        return Self { convene, items };
+        Self { convene, items }
     }
     /// Merge the [`GachaLog::items`] in two `GachaLog` objects.
     ///
@@ -101,14 +101,14 @@ impl GachaLog {
         if self.convene != other.convene {
             return None;
         }
-        if self.items.len() == 0 {
+        if self.items.is_empty() {
             return Some(other.clone());
         }
-        if other.items.len() == 0 {
+        if other.items.is_empty() {
             return Some(self.clone());
         }
-        let max_self = self.items.get(0).unwrap();
-        let max_other = other.items.get(0).unwrap();
+        let max_self = self.items.first().unwrap();
+        let max_other = other.items.first().unwrap();
         let (mut left, right) = if max_self >= max_other {
             (self.clone(), other)
         } else {
@@ -117,7 +117,7 @@ impl GachaLog {
         let left_last = left.items.last().unwrap();
         let split_point = right.items.partition_point(|x| x >= left_last);
         left.items.extend_from_slice(&right.items[split_point..]);
-        return Some(left);
+        Some(left)
     }
 
     pub fn convene(&self) -> &Convene {
@@ -130,7 +130,9 @@ impl GachaLog {
 }
 
 pub trait GachaService {
-    async fn get_gacha_data(&self) -> Result<Vec<GachaLog>, GachaError>;
+    fn get_gacha_data(
+        &self,
+    ) -> impl std::future::Future<Output = Result<Vec<GachaLog>, GachaError>> + Send;
 }
 
 impl GachaService for GachaLogSource {

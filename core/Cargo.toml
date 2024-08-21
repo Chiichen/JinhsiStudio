@@ -1,7 +1,9 @@
 [package]
 name = "jinhsi-core"
-version = "0.1.0"
+version = "0.0.1"
 edition = "2021"
+description = "鸣潮多功能工具箱 🧰 | Multifunctional Wuthering Waves Toolkit 🧰"
+authors = ["Chiichen<chiichen@qq.com>"]
 
 [dependencies]
 serde_json = "1.0"
