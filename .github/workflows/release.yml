@@ -15,8 +15,8 @@ jobs:
     outputs:
       jinhsi-studio-core--tag_name: ${{ steps.release.outputs.jinhsi-studio-core--tag_name}}
       jinhsi-studio-core--release_created: ${{ steps.release.outputs.jinhsi-studio-core--release_created}}
-      jinhsi-studio--tag_name: ${{ steps.release.outputs.jinhsi-studio--tag_name}}
-      jinhsi-studio--release_created: ${{ steps.release.outputs.jinhsi-studio--release_created}}
+      jinhsi-studio--tag_name: ${{ steps.release.outputs.tag_name}}
+      jinhsi-studio--release_created: ${{ steps.release.outputs.release_created}}
     steps:
       - uses: googleapis/release-please-action@v4
         id: release
