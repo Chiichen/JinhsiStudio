@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.1](https://github.com/Chiichen/JinhsiStudio/compare/jinhsi-studio-v0.1.0...jinhsi-studio-v0.1.1) (2024-08-21)
+
+
+### Features
+
+* trigger ([d595cfa](https://github.com/Chiichen/JinhsiStudio/commit/d595cfa4663d354ce29ca7b56ba1f995e79a54f2))
+
 ## [0.1.0](https://github.com/Chiichen/JinhsiStudio/compare/jinhsi-studio-v0.0.1...jinhsi-studio-v0.1.0) (2024-08-21)
 
 
