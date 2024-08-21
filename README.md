@@ -12,7 +12,7 @@ TODO
 TODO
 
 ## Develop
-
+ 
 ```shell
 pnpm install
 pnpm tauri dev # On host
