@@ -32,15 +32,15 @@ impl LocalGachaSource {
                 return Self::try_get_url_from_dir(path).map_or(self.probe_url_locally(), Ok);
             }
         }
-        return self.probe_url_locally();
+        self.probe_url_locally()
     }
 
     fn try_get_url_from_dir<P: AsRef<Path>>(game_path: P) -> Option<String> {
         if game_path.as_ref().is_dir() {
             return None;
         }
-        let gacha_log_path = game_path.as_ref().join("\\Client\\Saved\\Logs\\Client.log");
-        let debug_log_path = game_path.as_ref().join("\\Client\\Binaries\\Win64\\ThirdParty\\KrPcSdk_Global\\KRSDKRes\\KRSDKWebView\\debug.log");
+        let gacha_log_path = game_path.as_ref().join("Client\\Saved\\Logs\\Client.log");
+        let debug_log_path = game_path.as_ref().join("Client\\Binaries\\Win64\\ThirdParty\\KrPcSdk_Global\\KRSDKRes\\KRSDKWebView\\debug.log");
 
         if gacha_log_path.as_path().exists() {
             log::info!("Reading Client.log...");
@@ -105,7 +105,7 @@ impl LocalGachaSource {
                 let reader = BufReader::new(file.borrow());
 
                 // Read lines from the current offset to the end of the file
-                for line in reader.lines().flatten() {
+                for line in reader.lines().map_while(Result::ok) {
                     if lines.len() < lines_count {
                         lines.push(line);
                     } else {

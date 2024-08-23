@@ -1,9 +1,40 @@
-name: ci
+on:
+  push:
+    branches:
+      - master
 
-on: ["push","pull_request"]
+permissions:
+  contents: write
+  pull-requests: write
+
+name: release-please
 
 jobs:
-  build:
+  release-please:
+    runs-on: ubuntu-latest
+    outputs:
+      jinhsi-studio-core--tag_name: ${{ steps.release.outputs.jinhsi-studio-core--tag_name}}
+      jinhsi-studio-core--release_created: ${{ steps.release.outputs.jinhsi-studio-core--release_created}}
+      jinhsi-studio--tag_name: ${{ steps.release.outputs.tag_name}}
+      jinhsi-studio--release_created: ${{ steps.release.outputs.release_created}}
+    steps:
+      - uses: googleapis/release-please-action@v4
+        id: release
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          config-file: script/release/release-please-config.json
+          manifest-file: script/release/.release-please-manifest.json
+      - name: Print release outputs for debugging
+        continue-on-error: true
+        run: |
+          echo "Release outputs:"
+          echo "${{ toJson(steps.release.outputs) }}"
+
+
+
+  release-app:
+    if: ${{needs.release-please.outputs.jinhsi-studio--release_created}}
+    needs: release-please
     strategy:
       matrix:
         include:
@@ -54,26 +85,11 @@ jobs:
       - name: Format check
         run: pnpm lint
       - name: Tauri build
-        uses: tauri-apps/tauri-action@v0
+        uses: Chiichen/tauri-action@feat-upload-with-tag-name
         env:
           NODE_OPTIONS: "--max_old_space_size=4096"
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tauriScript: pnpm tauri
           args: --target ${{ matrix.target }} -b ${{ matrix.bundle }}
-
-      # - name: Upload Macos Artifacts
-      #   if: matrix.os == 'macos-latest'
-      #   uses: actions/upload-artifact@v4
-      #   with:
-      #     name: ${{ matrix.target }}
-      #     path: target/${{ matrix.target }}/release/bundle/dmg/*.dmg
-      #     if-no-files-found: error
-
-      # - name: Upload Windows Artifacts
-      #   if: matrix.os == 'windows-latest'
-      #   uses: actions/upload-artifact@v4
-      #   with:
-      #     name: ${{ matrix.target }}
-      #     path: target/${{ matrix.target }}/release/bundle/nsis/*.exe
-      #     if-no-files-found: error
+          tagName: ${{ needs.release-please.outputs.jinhsi-studio--tag_name }}
