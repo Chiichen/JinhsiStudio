@@ -1,6 +1,6 @@
 {
   "productName": "JinhsiStudio",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "identifier": "cn.chiichen.JinhsiStudio",
   "build": {
     "beforeDevCommand": "pnpm dev",
