@@ -1,6 +1,6 @@
 [package]
 name = "jinhsi-studio"
-version = "0.0.4"
+version = "0.0.5"
 description = "鸣潮多功能工具箱 🧰 | Multifunctional Wuthering Waves Toolkit 🧰"
 authors = ["Chiichen<chiichen@qq.com>"]
 edition = "2021"
